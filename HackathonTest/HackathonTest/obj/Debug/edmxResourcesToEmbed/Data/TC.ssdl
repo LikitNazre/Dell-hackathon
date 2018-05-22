@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HackathonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TestCase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TestCaseName" Type="varchar" MaxLength="50" />
+    <Property Name="LastRunStatus" Type="bit" />
+    <Property Name="IsExecuted" Type="bit" />
+  </EntityType>
+  <EntityType Name="TestCaseExecution">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="TestCaseId" Type="int" />
+    <Property Name="WebElementId" Type="int" />
+    <Property Name="TestCaseStepSequence" Type="int" />
+    <Property Name="StepDescription" Type="varchar" MaxLength="200" />
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WebElements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IsMultipleElemets" Type="bit" />
+    <Property Name="ElementName" Type="varchar" MaxLength="30" />
+    <Property Name="Locator" Type="varchar" MaxLength="30" />
+    <Property Name="FindElementMachanism" Type="varchar" MaxLength="50" />
+    <Property Name="InputType" Type="varchar" MaxLength="30" />
+    <Property Name="InputData" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__TestCaseE__TestC__267ABA7A">
+    <End Role="TestCase" Type="Self.TestCase" Multiplicity="0..1" />
+    <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestCase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TestCaseExecution">
+        <PropertyRef Name="TestCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TestCaseE__WebEl__276EDEB3">
+    <End Role="WebElements" Type="Self.WebElements" Multiplicity="0..1" />
+    <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebElements">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TestCaseExecution">
+        <PropertyRef Name="WebElementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HackathonModelStoreContainer">
+    <EntitySet Name="TestCase" EntityType="Self.TestCase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestCaseExecution" EntityType="Self.TestCaseExecution" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebElements" EntityType="Self.WebElements" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__TestCaseE__TestC__267ABA7A" Association="Self.FK__TestCaseE__TestC__267ABA7A">
+      <End Role="TestCase" EntitySet="TestCase" />
+      <End Role="TestCaseExecution" EntitySet="TestCaseExecution" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TestCaseE__WebEl__276EDEB3" Association="Self.FK__TestCaseE__WebEl__276EDEB3">
+      <End Role="WebElements" EntitySet="WebElements" />
+      <End Role="TestCaseExecution" EntitySet="TestCaseExecution" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

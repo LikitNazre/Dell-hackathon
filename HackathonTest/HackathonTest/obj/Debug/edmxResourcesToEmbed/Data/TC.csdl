@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HackathonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TestCase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="TestCaseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastRunStatus" Type="Boolean" />
+    <Property Name="IsExecuted" Type="Boolean" />
+    <NavigationProperty Name="TestCaseExecutions" Relationship="Self.FK__TestCaseE__TestC__267ABA7A" FromRole="TestCase" ToRole="TestCaseExecution" />
+  </EntityType>
+  <EntityType Name="TestCaseExecution">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="TestCaseId" Type="Int32" />
+    <Property Name="WebElementId" Type="Int32" />
+    <Property Name="TestCaseStepSequence" Type="Int32" />
+    <Property Name="StepDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TestCase" Relationship="Self.FK__TestCaseE__TestC__267ABA7A" FromRole="TestCaseExecution" ToRole="TestCase" />
+    <NavigationProperty Name="WebElement" Relationship="Self.FK__TestCaseE__WebEl__276EDEB3" FromRole="TestCaseExecution" ToRole="WebElements" />
+  </EntityType>
+  <EntityType Name="WebElement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IsMultipleElemets" Type="Boolean" />
+    <Property Name="ElementName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Locator" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FindElementMachanism" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InputType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="InputData" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TestCaseExecutions" Relationship="Self.FK__TestCaseE__WebEl__276EDEB3" FromRole="WebElements" ToRole="TestCaseExecution" />
+  </EntityType>
+  <Association Name="FK__TestCaseE__TestC__267ABA7A">
+    <End Role="TestCase" Type="Self.TestCase" Multiplicity="0..1" />
+    <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestCase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TestCaseExecution">
+        <PropertyRef Name="TestCaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TestCaseE__WebEl__276EDEB3">
+    <End Role="WebElements" Type="Self.WebElement" Multiplicity="0..1" />
+    <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebElements">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TestCaseExecution">
+        <PropertyRef Name="WebElementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HackathonEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TestCases" EntityType="Self.TestCase" />
+    <EntitySet Name="TestCaseExecutions" EntityType="Self.TestCaseExecution" />
+    <EntitySet Name="WebElements" EntityType="Self.WebElement" />
+    <AssociationSet Name="FK__TestCaseE__TestC__267ABA7A" Association="Self.FK__TestCaseE__TestC__267ABA7A">
+      <End Role="TestCase" EntitySet="TestCases" />
+      <End Role="TestCaseExecution" EntitySet="TestCaseExecutions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TestCaseE__WebEl__276EDEB3" Association="Self.FK__TestCaseE__WebEl__276EDEB3">
+      <End Role="WebElements" EntitySet="WebElements" />
+      <End Role="TestCaseExecution" EntitySet="TestCaseExecutions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

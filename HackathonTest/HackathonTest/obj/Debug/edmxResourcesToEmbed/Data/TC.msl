@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HackathonModelStoreContainer" CdmEntityContainer="HackathonEntities1">
+    <EntitySetMapping Name="TestCases">
+      <EntityTypeMapping TypeName="HackathonModel.TestCase">
+        <MappingFragment StoreEntitySet="TestCase">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TestCaseName" ColumnName="TestCaseName" />
+          <ScalarProperty Name="LastRunStatus" ColumnName="LastRunStatus" />
+          <ScalarProperty Name="IsExecuted" ColumnName="IsExecuted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestCaseExecutions">
+      <EntityTypeMapping TypeName="HackathonModel.TestCaseExecution">
+        <MappingFragment StoreEntitySet="TestCaseExecution">
+          <ScalarProperty Name="TestCaseId" ColumnName="TestCaseId" />
+          <ScalarProperty Name="WebElementId" ColumnName="WebElementId" />
+          <ScalarProperty Name="TestCaseStepSequence" ColumnName="TestCaseStepSequence" />
+          <ScalarProperty Name="StepDescription" ColumnName="StepDescription" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebElements">
+      <EntityTypeMapping TypeName="HackathonModel.WebElement">
+        <MappingFragment StoreEntitySet="WebElements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsMultipleElemets" ColumnName="IsMultipleElemets" />
+          <ScalarProperty Name="ElementName" ColumnName="ElementName" />
+          <ScalarProperty Name="Locator" ColumnName="Locator" />
+          <ScalarProperty Name="FindElementMachanism" ColumnName="FindElementMachanism" />
+          <ScalarProperty Name="InputType" ColumnName="InputType" />
+          <ScalarProperty Name="InputData" ColumnName="InputData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HackathonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TestCase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TestCaseName" Type="varchar" MaxLength="50" />
+          <Property Name="LastRunStatus" Type="bit" />
+          <Property Name="IsExecuted" Type="bit" />
+        </EntityType>
+        <EntityType Name="TestCaseExecution">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="TestCaseId" Type="int" />
+          <Property Name="WebElementId" Type="int" />
+          <Property Name="TestCaseStepSequence" Type="int" />
+          <Property Name="StepDescription" Type="varchar" MaxLength="200" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebElements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IsMultipleElemets" Type="bit" />
+          <Property Name="ElementName" Type="varchar" MaxLength="30" />
+          <Property Name="Locator" Type="varchar" MaxLength="30" />
+          <Property Name="FindElementMachanism" Type="varchar" MaxLength="50" />
+          <Property Name="InputType" Type="varchar" MaxLength="30" />
+          <Property Name="InputData" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__TestCaseE__TestC__267ABA7A">
+          <End Role="TestCase" Type="Self.TestCase" Multiplicity="0..1" />
+          <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestCase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestCaseExecution">
+              <PropertyRef Name="TestCaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestCaseE__WebEl__276EDEB3">
+          <End Role="WebElements" Type="Self.WebElements" Multiplicity="0..1" />
+          <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestCaseExecution">
+              <PropertyRef Name="WebElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HackathonModelStoreContainer">
+          <EntitySet Name="TestCase" EntityType="Self.TestCase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestCaseExecution" EntityType="Self.TestCaseExecution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebElements" EntityType="Self.WebElements" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TestCaseE__TestC__267ABA7A" Association="Self.FK__TestCaseE__TestC__267ABA7A">
+            <End Role="TestCase" EntitySet="TestCase" />
+            <End Role="TestCaseExecution" EntitySet="TestCaseExecution" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestCaseE__WebEl__276EDEB3" Association="Self.FK__TestCaseE__WebEl__276EDEB3">
+            <End Role="WebElements" EntitySet="WebElements" />
+            <End Role="TestCaseExecution" EntitySet="TestCaseExecution" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HackathonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TestCase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TestCaseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastRunStatus" Type="Boolean" />
+          <Property Name="IsExecuted" Type="Boolean" />
+          <NavigationProperty Name="TestCaseExecutions" Relationship="Self.FK__TestCaseE__TestC__267ABA7A" FromRole="TestCase" ToRole="TestCaseExecution" />
+        </EntityType>
+        <EntityType Name="TestCaseExecution">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="TestCaseId" Type="Int32" />
+          <Property Name="WebElementId" Type="Int32" />
+          <Property Name="TestCaseStepSequence" Type="Int32" />
+          <Property Name="StepDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestCase" Relationship="Self.FK__TestCaseE__TestC__267ABA7A" FromRole="TestCaseExecution" ToRole="TestCase" />
+          <NavigationProperty Name="WebElement" Relationship="Self.FK__TestCaseE__WebEl__276EDEB3" FromRole="TestCaseExecution" ToRole="WebElements" />
+        </EntityType>
+        <EntityType Name="WebElement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IsMultipleElemets" Type="Boolean" />
+          <Property Name="ElementName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Locator" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FindElementMachanism" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InputType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="InputData" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TestCaseExecutions" Relationship="Self.FK__TestCaseE__WebEl__276EDEB3" FromRole="WebElements" ToRole="TestCaseExecution" />
+        </EntityType>
+        <Association Name="FK__TestCaseE__TestC__267ABA7A">
+          <End Role="TestCase" Type="Self.TestCase" Multiplicity="0..1" />
+          <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestCase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestCaseExecution">
+              <PropertyRef Name="TestCaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestCaseE__WebEl__276EDEB3">
+          <End Role="WebElements" Type="Self.WebElement" Multiplicity="0..1" />
+          <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestCaseExecution">
+              <PropertyRef Name="WebElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HackathonEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TestCases" EntityType="Self.TestCase" />
+          <EntitySet Name="TestCaseExecutions" EntityType="Self.TestCaseExecution" />
+          <EntitySet Name="WebElements" EntityType="Self.WebElement" />
+          <AssociationSet Name="FK__TestCaseE__TestC__267ABA7A" Association="Self.FK__TestCaseE__TestC__267ABA7A">
+            <End Role="TestCase" EntitySet="TestCases" />
+            <End Role="TestCaseExecution" EntitySet="TestCaseExecutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestCaseE__WebEl__276EDEB3" Association="Self.FK__TestCaseE__WebEl__276EDEB3">
+            <End Role="WebElements" EntitySet="WebElements" />
+            <End Role="TestCaseExecution" EntitySet="TestCaseExecutions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HackathonModelStoreContainer" CdmEntityContainer="HackathonEntities1">
+          <EntitySetMapping Name="TestCases">
+            <EntityTypeMapping TypeName="HackathonModel.TestCase">
+              <MappingFragment StoreEntitySet="TestCase">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TestCaseName" ColumnName="TestCaseName" />
+                <ScalarProperty Name="LastRunStatus" ColumnName="LastRunStatus" />
+                <ScalarProperty Name="IsExecuted" ColumnName="IsExecuted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestCaseExecutions">
+            <EntityTypeMapping TypeName="HackathonModel.TestCaseExecution">
+              <MappingFragment StoreEntitySet="TestCaseExecution">
+                <ScalarProperty Name="TestCaseId" ColumnName="TestCaseId" />
+                <ScalarProperty Name="WebElementId" ColumnName="WebElementId" />
+                <ScalarProperty Name="TestCaseStepSequence" ColumnName="TestCaseStepSequence" />
+                <ScalarProperty Name="StepDescription" ColumnName="StepDescription" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebElements">
+            <EntityTypeMapping TypeName="HackathonModel.WebElement">
+              <MappingFragment StoreEntitySet="WebElements">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsMultipleElemets" ColumnName="IsMultipleElemets" />
+                <ScalarProperty Name="ElementName" ColumnName="ElementName" />
+                <ScalarProperty Name="Locator" ColumnName="Locator" />
+                <ScalarProperty Name="FindElementMachanism" ColumnName="FindElementMachanism" />
+                <ScalarProperty Name="InputType" ColumnName="InputType" />
+                <ScalarProperty Name="InputData" ColumnName="InputData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
