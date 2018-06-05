@@ -155,30 +155,39 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestCaseController.cs" />
+    <Compile Include="Controllers\TestCasesController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WebElementController.cs" />
-    <Compile Include="Data\TC.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TC.Context.tt</DependentUpon>
+    <Compile Include="Controllers\WebElementsController.cs" />
+    <Compile Include="Data\GetTestCases_Result.cs">
+      <DependentUpon>Hackathon.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\TC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TC.tt</DependentUpon>
+    <Compile Include="Data\GetWebElements_Result.cs">
+      <DependentUpon>Hackathon.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\TC.Designer.cs">
+    <Compile Include="Data\Hackathon.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TC.edmx</DependentUpon>
+      <DependentUpon>Hackathon.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Hackathon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hackathon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Hackathon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hackathon.edmx</DependentUpon>
     </Compile>
     <Compile Include="Data\TestCase.cs">
-      <DependentUpon>TC.tt</DependentUpon>
+      <DependentUpon>Hackathon.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\TestCaseExecution.cs">
-      <DependentUpon>TC.tt</DependentUpon>
+      <DependentUpon>Hackathon.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\WebElement.cs">
-      <DependentUpon>TC.tt</DependentUpon>
+      <DependentUpon>Hackathon.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,16 +199,18 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Data\TC.Context.tt">
+    <Content Include="Data\Hackathon.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TC.edmx</DependentUpon>
-      <LastGenOutput>TC.Context.cs</LastGenOutput>
+      <DependentUpon>Hackathon.edmx</DependentUpon>
+      <LastGenOutput>Hackathon.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Data\TC.tt">
+    <Content Include="Data\Hackathon.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TC.edmx</DependentUpon>
-      <LastGenOutput>TC.cs</LastGenOutput>
+      <DependentUpon>Hackathon.edmx</DependentUpon>
+      <LastGenOutput>Hackathon.cs</LastGenOutput>
     </Content>
+    <Content Include="DBScripts\all_scripts.sql" />
+    <Content Include="DBScripts\Hackathon_SQLScripts_v1.0.sql" />
     <Content Include="Drivers\chromedriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -215,12 +226,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Data\TC.edmx">
+    <EntityDeploy Include="Data\Hackathon.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TC.Designer.cs</LastGenOutput>
+      <LastGenOutput>Hackathon.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Data\TC.edmx.diagram">
-      <DependentUpon>TC.edmx</DependentUpon>
+    <Content Include="Data\Hackathon.edmx.diagram">
+      <DependentUpon>Hackathon.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -248,10 +259,17 @@
     <Content Include="Views\WebElement\CreateWebElement.cshtml" />
     <Content Include="Views\TestCase\CreateTestCase.cshtml" />
     <Content Include="Views\TestCase\ExecuteTestCase.cshtml" />
+    <Content Include="Views\WebElement\CreateWebElements.cshtml" />
+    <Content Include="Views\WebElements\Create.cshtml" />
+    <Content Include="Views\WebElements\Details.cshtml" />
+    <Content Include="Views\WebElements\Index.cshtml" />
+    <Content Include="Views\TestCases\Create.cshtml" />
+    <Content Include="Views\TestCases\Details.cshtml" />
+    <Content Include="Views\TestCases\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DBScripts\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

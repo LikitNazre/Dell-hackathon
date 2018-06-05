@@ -1,0 +1,66 @@
+﻿@model HackathonTest.Data.WebElement
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WebElement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IsMultipleElemets)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsMultipleElemets)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElementName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElementName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Locator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Locator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FindElementMachanism)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FindElementMachanism)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InputType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InputType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InputData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InputData)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

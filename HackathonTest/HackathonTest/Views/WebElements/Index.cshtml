@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HackathonTest.Data.WebElement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ElementName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Locator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FindElementMachanism)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InputType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InputData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsMultipleElemets)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ElementName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Locator)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FindElementMachanism)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InputType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InputData)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsMultipleElemets)
+    </td>
+    </tr>
+}
+
+</table>
