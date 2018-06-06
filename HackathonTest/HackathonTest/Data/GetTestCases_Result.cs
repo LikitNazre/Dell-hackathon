@@ -19,7 +19,7 @@ namespace HackathonTest.Data
         public string InputType { get; set; }
         public Nullable<bool> IsMultipleElemets { get; set; }
         public string Locator { get; set; }
-        public Nullable<int> TestCaseStepSequence { get; set; }
+        public int TestCaseStepSequence { get; set; }
         public string TestCaseName { get; set; }
         public Nullable<bool> LastRunStatus { get; set; }
         public Nullable<bool> IsExecuted { get; set; }

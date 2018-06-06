@@ -8,12 +8,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HackathonTest.Data;
+using HackathonTest.Models;
 
 namespace HackathonTest.Controllers
 {
     public class TestCasesController : Controller
     {
-        private HackathonEntities db = new HackathonEntities();
+        private DellHackEntities db = new DellHackEntities();
 
         // GET: TestCases
         public ActionResult Index()
@@ -55,7 +56,7 @@ namespace HackathonTest.Controllers
                 var IsExecuted = new SqlParameter("@IsExecuted", testCase.IsExecuted);
                 var LastRunStatus = new SqlParameter("@LastRunStatus", testCase.LastRunStatus);
 
-                using (var db = new HackathonEntities())
+                using (var db = new DellHackEntities())
                 {
                     db.Database.ExecuteSqlCommand("exec dbo.InsertTestCases @TestCaseName,@IsExecuted,@LastRunStatus",TestCaseName,IsExecuted,LastRunStatus);
                 }
@@ -68,27 +69,33 @@ namespace HackathonTest.Controllers
             return View(testCase);
         }
 
-        public ActionResult CreateTestCase(int testCaseId=0)
+        public ActionResult CreateTestCase(int testCaseId = 0)
         {
             var testCases = new DataTable();
-            testCases.Columns.Add("TestCaseId",typeof(int));
+            testCases.Columns.Add("TestCaseId", typeof(int));
             testCases.Columns.Add("WebEleId", typeof(int));
-            testCases.Columns.Add("TestCaseStepSequence",typeof(int));
-            testCases.Columns.Add("StepDescription",typeof(string));
+            testCases.Columns.Add("TestCaseStepSequence", typeof(int));
+            testCases.Columns.Add("StepDescription", typeof(string));
 
-            testCases.Rows.Add(testCaseId, 1, 1, "AddToCart");
-            testCases.Rows.Add(testCaseId, 2, 2, "Checkout");
+            testCases.Rows.Add(testCaseId, 1, 1, "Checkout");
 
-            var parameter = new SqlParameter("@Values", SqlDbType.Structured);
-            parameter.Value = testCases;
-            parameter.TypeName = "dbo.TestCaseSteps";
-
-            using (var db = new HackathonEntities())
+            var parameter = new SqlParameter("@Values", SqlDbType.Structured)
             {
-                db.Database.ExecuteSqlCommand("exec dbo.InsertTestCaseExecution @Values", testCases);
+                Value = testCases,
+                TypeName = "dbo.TestCaseSteps",
+            };
+            using (var db = new DellHackEntities())
+            {
+                db.Database.ExecuteSqlCommand("exec dbo.InsertTestCaseExecution @Values",parameter);
             }
 
                 return View();
+        }
+
+        public ActionResult RunTestCase()
+        {
+            Models.TestCaseExecution.ExecuteTestCase(2);
+            return View();
         }
 
         protected override void Dispose(bool disposing)

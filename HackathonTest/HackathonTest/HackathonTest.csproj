@@ -154,40 +154,37 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TestCaseController.cs" />
     <Compile Include="Controllers\TestCasesController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\WebElementController.cs" />
     <Compile Include="Controllers\WebElementsController.cs" />
+    <Compile Include="Data\DellHackathon.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DellHackathon.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DellHackathon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DellHackathon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DellHackathon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DellHackathon.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Data\GetTestCases_Result.cs">
-      <DependentUpon>Hackathon.tt</DependentUpon>
+      <DependentUpon>DellHackathon.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\GetWebElements_Result.cs">
-      <DependentUpon>Hackathon.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Hackathon.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Hackathon.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Hackathon.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Hackathon.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Hackathon.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Hackathon.edmx</DependentUpon>
+      <DependentUpon>DellHackathon.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\TestCase.cs">
-      <DependentUpon>Hackathon.tt</DependentUpon>
+      <DependentUpon>DellHackathon.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\TestCaseExecution.cs">
-      <DependentUpon>Hackathon.tt</DependentUpon>
+      <DependentUpon>DellHackathon.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\WebElement.cs">
-      <DependentUpon>Hackathon.tt</DependentUpon>
+      <DependentUpon>DellHackathon.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -199,15 +196,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Data\Hackathon.Context.tt">
+    <Content Include="Data\DellHackathon.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Hackathon.edmx</DependentUpon>
-      <LastGenOutput>Hackathon.Context.cs</LastGenOutput>
+      <DependentUpon>DellHackathon.edmx</DependentUpon>
+      <LastGenOutput>DellHackathon.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Data\Hackathon.tt">
+    <Content Include="Data\DellHackathon.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Hackathon.edmx</DependentUpon>
-      <LastGenOutput>Hackathon.cs</LastGenOutput>
+      <DependentUpon>DellHackathon.edmx</DependentUpon>
+      <LastGenOutput>DellHackathon.cs</LastGenOutput>
     </Content>
     <Content Include="DBScripts\all_scripts.sql" />
     <Content Include="DBScripts\Hackathon_SQLScripts_v1.0.sql" />
@@ -226,12 +223,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Data\Hackathon.edmx">
+    <EntityDeploy Include="Data\DellHackathon.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Hackathon.Designer.cs</LastGenOutput>
+      <LastGenOutput>DellHackathon.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Data\Hackathon.edmx.diagram">
-      <DependentUpon>Hackathon.edmx</DependentUpon>
+    <Content Include="Data\DellHackathon.edmx.diagram">
+      <DependentUpon>DellHackathon.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -256,20 +253,16 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\WebElement\CreateWebElement.cshtml" />
-    <Content Include="Views\TestCase\CreateTestCase.cshtml" />
-    <Content Include="Views\TestCase\ExecuteTestCase.cshtml" />
-    <Content Include="Views\WebElement\CreateWebElements.cshtml" />
     <Content Include="Views\WebElements\Create.cshtml" />
     <Content Include="Views\WebElements\Details.cshtml" />
     <Content Include="Views\WebElements\Index.cshtml" />
     <Content Include="Views\TestCases\Create.cshtml" />
     <Content Include="Views\TestCases\Details.cshtml" />
     <Content Include="Views\TestCases\Index.cshtml" />
+    <Content Include="Views\TestCases\RunTestCase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

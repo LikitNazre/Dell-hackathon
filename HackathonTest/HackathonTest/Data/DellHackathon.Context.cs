@@ -15,10 +15,10 @@ namespace HackathonTest.Data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class HackathonEntities : DbContext
+    public partial class DellHackEntities : DbContext
     {
-        public HackathonEntities()
-            : base("name=HackathonEntities")
+        public DellHackEntities()
+            : base("name=DellHackEntities")
         {
         }
     

@@ -14,9 +14,9 @@ namespace HackathonTest.Data
     
     public partial class TestCaseExecution
     {
-        public Nullable<int> TestCaseId { get; set; }
-        public Nullable<int> WebElementId { get; set; }
-        public Nullable<int> TestCaseStepSequence { get; set; }
+        public int TestCaseId { get; set; }
+        public int WebElementId { get; set; }
+        public int TestCaseStepSequence { get; set; }
         public string StepDescription { get; set; }
         public int id { get; set; }
     

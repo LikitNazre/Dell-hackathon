@@ -12,7 +12,7 @@ namespace HackathonTest.Controllers
 {
     public class WebElementsController : Controller
     {
-        private HackathonEntities db = new HackathonEntities();
+        private DellHackEntities db = new DellHackEntities();
 
         // GET: WebElements
         public ActionResult Index()

@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HackathonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DellHackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TestCase">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TestCaseName" Type="varchar" MaxLength="50" />
           <Property Name="LastRunStatus" Type="bit" />
           <Property Name="IsExecuted" Type="bit" />
@@ -18,17 +18,17 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="TestCaseId" Type="int" />
-          <Property Name="WebElementId" Type="int" />
-          <Property Name="TestCaseStepSequence" Type="int" />
+          <Property Name="TestCaseId" Type="int" Nullable="false" />
+          <Property Name="WebElementId" Type="int" Nullable="false" />
+          <Property Name="TestCaseStepSequence" Type="int" Nullable="false" />
           <Property Name="StepDescription" Type="varchar" MaxLength="200" />
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="WebElements">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IsMultipleElemets" Type="bit" />
           <Property Name="ElementName" Type="varchar" MaxLength="30" />
           <Property Name="Locator" Type="varchar" MaxLength="30" />
@@ -36,8 +36,8 @@
           <Property Name="InputType" Type="varchar" MaxLength="30" />
           <Property Name="InputData" Type="varchar" MaxLength="30" />
         </EntityType>
-        <Association Name="FK__TestCaseE__TestC__267ABA7A">
-          <End Role="TestCase" Type="Self.TestCase" Multiplicity="0..1" />
+        <Association Name="FK__TestCaseE__TestC__286302EC">
+          <End Role="TestCase" Type="Self.TestCase" Multiplicity="1" />
           <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TestCase">
@@ -48,8 +48,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TestCaseE__WebEl__276EDEB3">
-          <End Role="WebElements" Type="Self.WebElements" Multiplicity="0..1" />
+        <Association Name="FK__TestCaseE__WebEl__29572725">
+          <End Role="WebElements" Type="Self.WebElements" Multiplicity="1" />
           <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WebElements">
@@ -76,60 +76,61 @@
           <Parameter Name="InputType" Type="varchar" Mode="In" />
           <Parameter Name="InputData" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="HackathonModelStoreContainer">
+        <EntityContainer Name="DellHackModelStoreContainer">
           <EntitySet Name="TestCase" EntityType="Self.TestCase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestCaseExecution" EntityType="Self.TestCaseExecution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebElements" EntityType="Self.WebElements" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__TestCaseE__TestC__267ABA7A" Association="Self.FK__TestCaseE__TestC__267ABA7A">
+          <AssociationSet Name="FK__TestCaseE__TestC__286302EC" Association="Self.FK__TestCaseE__TestC__286302EC">
             <End Role="TestCase" EntitySet="TestCase" />
             <End Role="TestCaseExecution" EntitySet="TestCaseExecution" />
           </AssociationSet>
-          <AssociationSet Name="FK__TestCaseE__WebEl__276EDEB3" Association="Self.FK__TestCaseE__WebEl__276EDEB3">
+          <AssociationSet Name="FK__TestCaseE__WebEl__29572725" Association="Self.FK__TestCaseE__WebEl__29572725">
             <End Role="WebElements" EntitySet="WebElements" />
             <End Role="TestCaseExecution" EntitySet="TestCaseExecution" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="HackathonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DellHackModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="TestCase">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TestCaseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastRunStatus" Type="Boolean" />
           <Property Name="IsExecuted" Type="Boolean" />
-          <NavigationProperty Name="TestCaseExecutions" Relationship="Self.FK__TestCaseE__TestC__267ABA7A" FromRole="TestCase" ToRole="TestCaseExecution" />
+          <NavigationProperty Name="TestCaseExecutions" Relationship="Self.FK__TestCaseE__TestC__286302EC" FromRole="TestCase" ToRole="TestCaseExecution" />
         </EntityType>
         <EntityType Name="TestCaseExecution">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="TestCaseId" Type="Int32" />
-          <Property Name="WebElementId" Type="Int32" />
-          <Property Name="TestCaseStepSequence" Type="Int32" />
+          <Property Name="TestCaseId" Type="Int32" Nullable="false" />
+          <Property Name="WebElementId" Type="Int32" Nullable="false" />
+          <Property Name="TestCaseStepSequence" Type="Int32" Nullable="false" />
           <Property Name="StepDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TestCase" Relationship="Self.FK__TestCaseE__TestC__267ABA7A" FromRole="TestCaseExecution" ToRole="TestCase" />
-          <NavigationProperty Name="WebElement" Relationship="Self.FK__TestCaseE__WebEl__276EDEB3" FromRole="TestCaseExecution" ToRole="WebElements" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="TestCase" Relationship="Self.FK__TestCaseE__TestC__286302EC" FromRole="TestCaseExecution" ToRole="TestCase" />
+          <NavigationProperty Name="WebElement" Relationship="Self.FK__TestCaseE__WebEl__29572725" FromRole="TestCaseExecution" ToRole="WebElements" />
         </EntityType>
         <EntityType Name="WebElement">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IsMultipleElemets" Type="Boolean" />
           <Property Name="ElementName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Locator" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="FindElementMachanism" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="InputType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="InputData" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TestCaseExecutions" Relationship="Self.FK__TestCaseE__WebEl__276EDEB3" FromRole="WebElements" ToRole="TestCaseExecution" />
+          <NavigationProperty Name="TestCaseExecutions" Relationship="Self.FK__TestCaseE__WebEl__29572725" FromRole="WebElements" ToRole="TestCaseExecution" />
         </EntityType>
-        <Association Name="FK__TestCaseE__TestC__267ABA7A">
-          <End Role="TestCase" Type="Self.TestCase" Multiplicity="0..1" />
+        <Association Name="FK__TestCaseE__TestC__286302EC">
+          <End Role="TestCase" Type="Self.TestCase" Multiplicity="1" />
           <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TestCase">
@@ -140,8 +141,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TestCaseE__WebEl__276EDEB3">
-          <End Role="WebElements" Type="Self.WebElement" Multiplicity="0..1" />
+        <Association Name="FK__TestCaseE__WebEl__29572725">
+          <End Role="WebElements" Type="Self.WebElement" Multiplicity="1" />
           <End Role="TestCaseExecution" Type="Self.TestCaseExecution" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WebElements">
@@ -152,20 +153,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HackathonEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DellHackEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TestCases" EntityType="Self.TestCase" />
           <EntitySet Name="TestCaseExecutions" EntityType="Self.TestCaseExecution" />
           <EntitySet Name="WebElements" EntityType="Self.WebElement" />
-          <AssociationSet Name="FK__TestCaseE__TestC__267ABA7A" Association="Self.FK__TestCaseE__TestC__267ABA7A">
+          <AssociationSet Name="FK__TestCaseE__TestC__286302EC" Association="Self.FK__TestCaseE__TestC__286302EC">
             <End Role="TestCase" EntitySet="TestCases" />
             <End Role="TestCaseExecution" EntitySet="TestCaseExecutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__TestCaseE__WebEl__276EDEB3" Association="Self.FK__TestCaseE__WebEl__276EDEB3">
+          <AssociationSet Name="FK__TestCaseE__WebEl__29572725" Association="Self.FK__TestCaseE__WebEl__29572725">
             <End Role="WebElements" EntitySet="WebElements" />
             <End Role="TestCaseExecution" EntitySet="TestCaseExecutions" />
           </AssociationSet>
-          <FunctionImport Name="GetTestCases" ReturnType="Collection(HackathonModel.GetTestCases_Result)" />
-          <FunctionImport Name="GetWebElements" ReturnType="Collection(HackathonModel.GetWebElements_Result)" />
+          <FunctionImport Name="GetTestCases" ReturnType="Collection(DellHackModel.GetTestCases_Result)" />
+          <FunctionImport Name="GetWebElements" ReturnType="Collection(DellHackModel.GetWebElements_Result)" />
           <FunctionImport Name="InsertTestCaseExecution" />
           <FunctionImport Name="InsertTestCases">
             <Parameter Name="TestCaseName" Mode="In" Type="String" />
@@ -188,7 +189,7 @@
           <Property Type="String" Name="InputType" Nullable="true" MaxLength="30" />
           <Property Type="Boolean" Name="IsMultipleElemets" Nullable="true" />
           <Property Type="String" Name="Locator" Nullable="true" MaxLength="30" />
-          <Property Type="Int32" Name="TestCaseStepSequence" Nullable="true" />
+          <Property Type="Int32" Name="TestCaseStepSequence" Nullable="false" />
           <Property Type="String" Name="TestCaseName" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="LastRunStatus" Nullable="true" />
           <Property Type="Boolean" Name="IsExecuted" Nullable="true" />
@@ -207,9 +208,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HackathonModelStoreContainer" CdmEntityContainer="HackathonEntities">
+        <EntityContainerMapping StorageEntityContainer="DellHackModelStoreContainer" CdmEntityContainer="DellHackEntities">
           <EntitySetMapping Name="TestCases">
-            <EntityTypeMapping TypeName="HackathonModel.TestCase">
+            <EntityTypeMapping TypeName="DellHackModel.TestCase">
               <MappingFragment StoreEntitySet="TestCase">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TestCaseName" ColumnName="TestCaseName" />
@@ -219,7 +220,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestCaseExecutions">
-            <EntityTypeMapping TypeName="HackathonModel.TestCaseExecution">
+            <EntityTypeMapping TypeName="DellHackModel.TestCaseExecution">
               <MappingFragment StoreEntitySet="TestCaseExecution">
                 <ScalarProperty Name="TestCaseId" ColumnName="TestCaseId" />
                 <ScalarProperty Name="WebElementId" ColumnName="WebElementId" />
@@ -230,7 +231,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WebElements">
-            <EntityTypeMapping TypeName="HackathonModel.WebElement">
+            <EntityTypeMapping TypeName="DellHackModel.WebElement">
               <MappingFragment StoreEntitySet="WebElements">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IsMultipleElemets" ColumnName="IsMultipleElemets" />
@@ -242,9 +243,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetTestCases" FunctionName="HackathonModel.Store.GetTestCases">
+          <FunctionImportMapping FunctionImportName="GetTestCases" FunctionName="DellHackModel.Store.GetTestCases">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="HackathonModel.GetTestCases_Result">
+              <ComplexTypeMapping TypeName="DellHackModel.GetTestCases_Result">
                 <ScalarProperty Name="ElementName" ColumnName="ElementName" />
                 <ScalarProperty Name="FindElementMachanism" ColumnName="FindElementMachanism" />
                 <ScalarProperty Name="InputData" ColumnName="InputData" />
@@ -258,9 +259,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetWebElements" FunctionName="HackathonModel.Store.GetWebElements">
+          <FunctionImportMapping FunctionImportName="GetWebElements" FunctionName="DellHackModel.Store.GetWebElements">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="HackathonModel.GetWebElements_Result">
+              <ComplexTypeMapping TypeName="DellHackModel.GetWebElements_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IsMultipleElemets" ColumnName="IsMultipleElemets" />
                 <ScalarProperty Name="ElementName" ColumnName="ElementName" />
@@ -271,9 +272,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="InsertTestCaseExecution" FunctionName="HackathonModel.Store.InsertTestCaseExecution" />
-          <FunctionImportMapping FunctionImportName="InsertTestCases" FunctionName="HackathonModel.Store.InsertTestCases" />
-          <FunctionImportMapping FunctionImportName="InsertWebElements" FunctionName="HackathonModel.Store.InsertWebElements" />
+          <FunctionImportMapping FunctionImportName="InsertTestCaseExecution" FunctionName="DellHackModel.Store.InsertTestCaseExecution" />
+          <FunctionImportMapping FunctionImportName="InsertTestCases" FunctionName="DellHackModel.Store.InsertTestCases" />
+          <FunctionImportMapping FunctionImportName="InsertWebElements" FunctionName="DellHackModel.Store.InsertWebElements" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
